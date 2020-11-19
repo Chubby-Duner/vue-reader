@@ -1,0 +1,74 @@
+.history-box{
+  padding-top: 46px;
+  min-height: calc(100vh - 46px);
+  background-color: #f2f2f2;
+
+  .custom-image .van-empty__image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .book-content{
+    padding: 20px;
+  }
+  .book-list{
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+
+    .line{
+      margin: 0 5px;
+      width: 2px;
+      height: 100%;
+      background-color: #ccc;
+    }
+
+    .imgBox-bg{
+      margin-right: 25px;
+      width: 80px;
+      height: 100px;
+      border-radius: 4px;
+      background-color: #fcfcfc;
+      box-shadow: 0px 0px 10px #888888;
+      
+
+      .imgBox{
+        width: 60px;
+        height: 80px;
+        margin: 10px auto;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+    }
+
+    .book-info{
+      margin-top: 13px;
+      // padding-bottom: 30px;
+      width: calc(100% - 125px);
+      // border-bottom: 1px solid #EFEFEF;
+
+      .title{
+        font-size: 16px;
+        color: #040404;
+        font-weight: 600;
+      }
+
+      .chapter{
+        margin-top: 15px;
+        color: #929292;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .time{
+        margin-top: 15px;
+        color: #CCCCCC;
+        font-size: 12px;
+      }
+    }
+  }
+}

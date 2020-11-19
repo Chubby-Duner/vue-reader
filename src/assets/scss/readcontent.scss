@@ -1,0 +1,429 @@
+.read-content {
+  position: relative;
+  min-height: 100vh;
+
+  .read-content-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    overflow: hidden;
+    color: #fff;
+    background-color: #f2f2f2;
+    transform: translateY(-100%);
+    transition: transform 0.15s;
+    z-index: 99;
+
+    .icon-back {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      font-size: 18px;
+    }
+
+    .icon-listen {
+      position: absolute;
+      top: 10px;
+      right: 50px;
+      font-size: 18px;
+    }
+
+    .icon-options {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+    }
+
+    .icon-back:before,
+    .icon-listen:before,
+    // .icon-back-top:
+    .icon-options:before {
+      color: #646566;
+    }
+  }
+
+  .read-article-content {
+    .book-title {
+      padding: 10px 20px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+      color: #646566;
+    }
+
+    .content-list {
+      padding: 10px 10px 60px 10px;
+
+      h3 {
+        margin: 0 0 20px;
+        font-size: 20px;
+      }
+      p {
+        text-indent: 2em;
+        margin: 0.5em 0;
+        letter-spacing: 0;
+        line-height: 1.8;
+      }
+    }
+
+    button.nextChapter {
+      position: absolute;
+      bottom: 20px;
+      left: 10%;
+      display: block;
+      width: 80%;
+      font-size: 16px;
+      line-height: 36px;
+      border: none;
+      border-radius: 100px;
+      color: #fff;
+      background-color: #00bb86;
+      z-index: 10;
+      outline: none;
+    }
+  }
+
+  .read-content-set {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 90px;
+    padding-bottom: 8px;
+    font-size: 14px;
+    overflow: hidden;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.15s;
+    color: #646566;
+    background-color: #f2f2f2;
+
+    .read-setbg-list {
+      display: flex;
+      padding: 10px 0;
+      overflow: hidden;
+      border-bottom: 1px solid #c2c2c2;
+
+      .setbg-item {
+        flex: 1;
+        text-align: center;
+
+        span {
+          position: relative;
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          border-radius: 50%;
+          border: 2px solid rgba(0, 0, 0, 0.9);
+
+          &.active {
+            border-color: #00bb86;
+
+            .icon {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 语音
+  .speak-box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    overflow: hidden;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.15s;
+    color: #646566;
+    background-color: #fff;
+
+    .title {
+      border-bottom: 1px solid #c2c2c2;
+      font-size: 14px;
+      padding: 20px 0px 20px 20px;
+      background-color: #fff;
+    }
+
+    .speak-item {
+      display: flex;
+      border-bottom: 1px solid #c2c2c2;
+
+      .start,
+      .pause,
+      .keepgo {
+        flex: 1;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        border-right: 1px solid #c2c2c2;
+      }
+
+      .start {
+        background-color: #f2f2f2;
+      }
+
+      .pause {
+        background-color: #f2f2f2;
+      }
+
+      .keepgo {
+        background-color: #f2f2f2;
+      }
+    }
+
+    .quit-speak {
+      font-size: 16px;
+      text-align: center;
+      padding: 20px 0;
+      background-color: #f2f2f2;
+    }
+
+    .time-list{
+      overflow: hidden;
+      padding: 10px 0;
+      background-color: #f2f2f2;
+      border-bottom: 1px solid #c2c2c2;
+
+      >div{
+        float: left;
+        margin-right: 22px;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border: 1px solid #c2c2c2;
+        border-radius: 4px;
+      }
+
+      >div:first-child{
+        border: 0;
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .read-setsize {
+    padding: 10px 0;
+    display: flex;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .read-setsize-item {
+      flex: 1;
+      span {
+        display: inline-block;
+        width: 80%;
+        margin: 0 10%;
+        border: 1px solid #646566;
+        border-radius: 100px;
+        line-height: 36px;
+        text-align: center;
+        font-size: 20px;
+        color: #646566;
+
+        &.nochange {
+          opacity: 0.6;
+        }
+
+        .icon-reduce-size:before,
+        .icon-increase-size:before {
+          color: #646566;
+        }
+      }
+    }
+  }
+
+  .read-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // height: 50px;
+    overflow: hidden;
+    color: #646566;
+    background-color: #f2f2f2;
+    transform: translateY(100%);
+    transition: transform 0.15s;
+    z-index: 99;
+
+    .footer-bar {
+      width: 100%;
+      display: flex;
+
+      .footer-item {
+        padding-bottom: 5px;
+        flex: 1;
+        height: 50px;
+        text-align: center;
+
+        span {
+          display: block;
+          margin-top: 8px;
+          font-size: 16px;
+        }
+
+        .bar-item {
+          margin-top: 8px;
+          font-size: 14px;
+        }
+
+        .icon-catalog:before,
+        .icon-moon:before,
+        .icon-sun:before,
+        .icon-setting:before {
+          color: #646566;
+        }
+      }
+    }
+
+    .chapters-control {
+      display: flex;
+      border-bottom: 1px soild #e9e9e9;
+
+      /deep/ .van-slider {
+        top: 15px;
+      }
+
+      .slider {
+        flex: 8;
+      }
+
+      .prev-chapter,
+      .next-chapter {
+        flex: 1;
+        padding: 5px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        color: #c2c2c2;
+        background-color: #f2f2f2;
+        border-top: 1px solid #c2c2c2;
+        border-bottom: 1px solid #c2c2c2;
+      }
+
+      .prev-chapter {
+        // margin-right: 10px;
+        border-right: 1px solid #c2c2c2;
+      }
+    }
+  }
+
+  .read-opt {
+    transform: translate(0%, 0%);
+    opacity: 1;
+    display: block;
+  }
+
+  .read-action-mid {
+    position: fixed;
+    width: 60%;
+    height: 40%;
+    top: 30%;
+    left: 20%;
+    z-index: 1000;
+  }
+
+  .icon-back-top {
+    position: fixed;
+    right: 30px;
+    bottom: 200px;
+    font-size: 26px;
+  }
+
+  // 目录样式
+  .catelog {
+    .catelog-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+
+      h3 {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #464646;
+      }
+
+      .action-bar {
+        overflow: hidden;
+
+        .text,
+        .sort
+        {
+          font-size: 14px;
+          color: #3d3d3d;
+        }
+
+        
+
+        .icon {
+          font-size: 16px;
+
+          .icon-sort:before {
+            color: #8c8c8c;
+          }
+        }
+      }
+    }
+
+    .catalog-list {
+      margin-top: 112px;
+      padding: 0 20px;
+
+      .catalog-item {
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+        color: #a9a9a9;
+        border-bottom: 1px solid #e9e9e9;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.active {
+          color: #00bb86;
+        }
+      }
+    }
+  }
+}
+
+// 皮肤颜色
+.skin-default {
+  background-color: #c4b395;
+}
+
+.skin-blue {
+  background-color: #c3d4e6;
+}
+
+.skin-green {
+  background-color: #c8e8c8;
+}
+
+.skin-pink {
+  background-color: #f8c9c9;
+}
+
+.skin-dark {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #3e4349;
+}
+
+.skin-light {
+  background-color: #f6f7f9;
+}
+
+.night {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #1a1a1a;
+}

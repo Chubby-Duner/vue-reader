@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'icon';
+  src:  url('../fonts/icon.eot?5mbu4g');
+  src:  url('../fonts/icon.eot?5mbu4g#iefix') format('embedded-opentype'),
+    url('../fonts/icon.ttf?5mbu4g') format('truetype'),
+    url('../fonts/icon.woff?5mbu4g') format('woff'),
+    url('../fonts/icon.svg?5mbu4g#icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bookshelf1:before {
+  content: "\e900";
+  color: #6a6d71;
+}
+.icon-category:before {
+  content: "\e927";
+  color: #6a6d71;
+}
+.icon-booklist:before {
+  content: "\e921";
+}
+.icon-borwseHistory:before {
+  content: "\e922";
+}
+.icon-follow:before {
+  content: "\e923";
+}
+.icon-like:before {
+  content: "\e924";
+}
+.icon-msg:before {
+  content: "\e925";
+}
+.icon-mycom:before {
+  content: "\e926";
+}
+.icon-my:before {
+  content: "\e920";
+  color: #6a6d71;
+}
+.icon-Shelf:before {
+  content: "\e91f";
+  color: #fff;
+}
+.icon-addShelf .path1:before {
+  content: "\e913";
+  color: rgb(153, 153, 153);
+  opacity: 0.0100;
+}
+.icon-addShelf .path2:before {
+  content: "\e91e";
+  margin-left: -1em;
+  color: rgb(153, 153, 153);
+}
+.icon-back-top .path1:before {
+  content: "\e91c";
+  color: rgb(0, 0, 0);
+}
+.icon-back-top .path2:before {
+  content: "\e91d";
+  margin-left: -1.0107421875em;
+  color: rgb(255, 255, 255);
+}
+.icon-listen:before {
+  content: "\e91a";
+}
+.icon-options:before {
+  content: "\e91b";
+}
+.icon-check:before {
+  content: "\e919";
+  color: #22d7bb;
+}
+.icon-increase-size:before {
+  content: "\e917";
+  color: #fff;
+}
+.icon-reduce-size:before {
+  content: "\e918";
+  color: #fff;
+}
+.icon-inShelf:before {
+  content: "\e912";
+  color: #999;
+}
+.icon-manage-shelf:before {
+  content: "\e914";
+  color: #fff;
+}
+.icon-down-arrow:before {
+  content: "\e90f";
+  color: #a5a5a5;
+}
+.icon-change-another-one:before {
+  content: "\e90d";
+}
+.icon-delete:before {
+  content: "\e90e";
+}
+.icon-person:before {
+  content: "\e90c";
+}
+.icon-add-book:before {
+  content: "\e905";
+  color: #ccc;
+}
+.icon-back:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-catalog:before {
+  content: "\e907";
+  color: #fff;
+}
+.icon-moon:before {
+  content: "\e908";
+  color: #fff;
+}
+.icon-setting:before {
+  content: "\e909";
+  color: #fff;
+}
+.icon-sort:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-sun:before {
+  content: "\e90b";
+  color: #fff;
+}
+.icon-search:before {
+  content: "\e904";
+  color: #fff;
+}
+.icon-rank:before {
+  content: "\e901";
+  color: #6a6d71;
+}
+.icon-bookstore:before {
+  content: "\e902";
+  color: #6a6d71;
+}
+.icon-bookshelf:before {
+  content: "\e903";
+  color: #6a6d71;
+}

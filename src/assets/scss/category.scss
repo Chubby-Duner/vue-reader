@@ -1,0 +1,34 @@
+.cate-wrapper {
+  padding-bottom: 60px;
+
+  /deep/ .van-nav-bar .van-icon {
+    color: #fff;
+  } 
+  
+  /deep/ .van-nav-bar__text {
+    color: #fff;
+  }
+
+  /deep/ .van-nav-bar{
+    background-color: #00bb86;
+  }
+
+  /deep/ .van-nav-bar__title{
+    color: #fff;
+  }
+
+  .cate-list{
+    // overflow: hidden;
+    // height: 100%;
+  }
+
+  .icon-search:before {
+    color    : #fff;
+    font-size: 16px;
+  }
+
+  .white-space1{
+    width: 100%;
+    height: 60px;
+  }
+}
