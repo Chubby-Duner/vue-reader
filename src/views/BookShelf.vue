@@ -14,12 +14,12 @@
     <!-- 添加书籍 管理书架 -->
     <div class="manage-box" v-if="showManage">
       <div class="manage-item">
-        <van-button type="primary" color="#00bb86" @click="showHideCheck"
+        <van-button type="primary" color="#B5331D" @click="showHideCheck"
           >管理书架</van-button
         >
       </div>
       <div class="manage-item">
-        <van-button type="primary" color="#00bb86" @click="showPopup"
+        <van-button type="primary" color="#B5331D" @click="showPopup"
           >去添加</van-button
         >
       </div>
@@ -32,7 +32,7 @@
             class="check-box"
             v-if="showCheck"
             v-model="item.checked"
-            checked-color="#00bb86"
+            checked-color="#B5331D"
             @click="checkOne"
           ></van-checkbox>
           <div class="imgBox-bg clearfix">
@@ -56,7 +56,7 @@
       <van-checkbox
         class="check-all fl"
         v-model="AllChecked"
-        checked-color="#00bb86"
+        checked-color="#B5331D"
         @click="allCheck"
         >全选</van-checkbox
       >
@@ -65,12 +65,6 @@
         <div class="del-btn fr" @click="removeBook">删除</div>
       </div>
     </div>
-    <!-- 添加书籍 -->
-    <!-- <div class="add-book" v-if="this.shelfList.length > 0">
-      <van-button type="primary" color="#00bb86" @click="showPopup"
-        >去添加</van-button
-      >
-    </div> -->
     <!-- 弹出层 -->
     <van-popup v-model="showPop" closeable close-icon="close" position="bottom">
       <ul>
@@ -125,7 +119,7 @@ export default {
       if (this.shelfList.length > 0) {
         this.showCheck = true;
       } else {
-        this.$toast.fail('未拥有书籍！');
+        this.$toast.fail('未拥有书籍');
       }
 
       this.showManage = false;
@@ -178,7 +172,7 @@ export default {
             .confirm({
               message: "是否要将勾选的书籍移出书架?",
               theme: "round-button",
-              confirmButtonColor: '#00bb86',
+              confirmButtonColor: '#B5331D',
               cancelButtonColor: '#222222'
             })
             .then(() => {
@@ -205,7 +199,9 @@ export default {
               }, 800)
 
             })
-            .catch(() => {
+            .catch((err) => {
+              this.$toast(err);
+              this.$toast.clear()
               // on cancel
               console.log("取消移出");
             });

@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 // 导入vant框架
-import VantConfig from './vant.config'
+import VantConfig from './vant.config' 
 
 import store from './store'
 import axios from 'axios'

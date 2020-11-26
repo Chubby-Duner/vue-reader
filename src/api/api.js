@@ -1,4 +1,4 @@
-import axios from 'axios' 
+import axios from 'axios'  
 
 //带书籍数量的父分类(所有分类，男生(古代言情)，女生，picture, press,)
 export function getCategories() {

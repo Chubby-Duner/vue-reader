@@ -103,7 +103,7 @@ export default {
         },
         {
           title: '我的收藏',
-          icon: 'icon-follow'
+          icon: 'icon-like'
         },
         {
           title: '书单',

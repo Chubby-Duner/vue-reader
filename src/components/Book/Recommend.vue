@@ -6,7 +6,7 @@
       <router-link
         tag="li"
         v-for="item in books"
-        :key="item._id"
+        :key="item._id" 
         class="recommend-item"
         :to="{ name: 'book', params: { bookId: item._id, isRecom: 1 } }"
       >
@@ -59,7 +59,7 @@ export default {
           // console.log(this.books, "this.books", typeof this.books);
         })
         .catch((err) => {
-          console.log(err);
+          this.$toast(err);
         });
     },
   }

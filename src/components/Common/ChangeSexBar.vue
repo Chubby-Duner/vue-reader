@@ -65,7 +65,7 @@ export default {
   height: 46px;
   overflow: hidden;
   color: #fff;
-  background-color: #15C292;
+  background-color: #B5331D;
   box-sizing: border-box;
   z-index: 99;
 

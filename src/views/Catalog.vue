@@ -2,7 +2,7 @@
   <div>
     <div class="back-bar">
       <span class="back-icon" @click="Back">
-        <i class="icon-back icon"></i> 
+        <i class="icon-back icon"></i>
       </span>
       <h2>{{ bookTitle }}</h2>
       <!-- <span></span> -->
@@ -75,9 +75,15 @@ export default {
               this.ChapterList = res.data.chapters;
               // console.log(this.ChapterList);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              this.$toast.clear();
+              this.$toast(err);
+            });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.$toast.clear();
+          this.$toast(err);
+        });
     },
     Back() {
       this.$router.back();

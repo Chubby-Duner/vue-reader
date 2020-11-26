@@ -52,6 +52,9 @@
         font-size: 16px;
         color: #040404;
         font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .chapter{

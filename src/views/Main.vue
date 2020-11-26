@@ -2,7 +2,7 @@
   <div class="main">
     <!-- 二级路由 -->
     <div>
-      <router-view></router-view>
+      <router-view></router-view> 
     </div>
 
     <!-- tab切换 -->
@@ -79,11 +79,11 @@ export default {
     text-align: center;
 
     &.exact {
-      color: #00bb86;
+      color: #b5331d;
     }
 
     &.exact .icon::before {
-      color: #00bb86;
+      color: #b5331d;
     }
   }
   .tab-item-icon {

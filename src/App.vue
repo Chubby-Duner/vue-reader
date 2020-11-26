@@ -6,17 +6,12 @@
   </div>
 </template> 
 
-<script>
-export default {
-
-}
-</script>
-
 <style>
 html {
   overflow: hidden;
   overflow-y: auto;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,4 +44,5 @@ html {
   display: block;
   clear: both;
 }
+
 </style>

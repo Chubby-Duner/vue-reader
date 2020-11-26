@@ -1,6 +1,6 @@
 <template>
   <!-- 评论 -->
-  <div class="comment-wrapper">
+  <div class="comment-wrapper" v-show="commentList.length > 0">
     <h3>热门书评</h3>
     <transition-group tag="ul" name="slider" class="comment-list">
       <li
@@ -80,7 +80,7 @@ export default {
           });
         })
         .catch((error) => {
-          console.log(error);
+          this.$toast(error);
         });
     },
   },
@@ -123,10 +123,13 @@ export default {
     top: 0;
     left: 0;
 
+    /* 动画 */
+ 
+    /* to 结束  active 生效时的状态*/
     &.slider-enter {
       transform: translateY(110%);
     }
-
+    // 过程中
     &.slider-enter-active,
     &.slider-leave-active {
       transition: all 0.5s linear;
@@ -140,6 +143,7 @@ export default {
     &.slider-leave-to {
       transform: translateY(-110%);
     }
+    /* 动画 end */
 
     .author {
       margin-bottom: 10px;
@@ -173,15 +177,15 @@ export default {
         }
 
         .leval {
-          padding: 2px;
+          padding: 0 4px 0 2px;
           width: 60px;
-          height: 8px;
-          line-height: 8px;
+          height: 6px;
+          line-height: 6px;
           text-align: center;
           font-size: 14px;
-          color: #00bb86;
+          color: #B5331D;
           border-radius: 10px;
-          border: 1px solid #00bb86;
+          border: 1px solid #B5331D;
         }
       }
     }

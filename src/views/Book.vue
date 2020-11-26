@@ -197,6 +197,9 @@ export default {
         this.$nextTick(() => {
           this.loading = false;
         })
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
       })
     },
     // 控制书籍介绍的展开或收起

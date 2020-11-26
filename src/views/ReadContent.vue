@@ -1,5 +1,15 @@
 <template>
   <div :class="['read-content', skinColor, { night: nightMode }]">
+    <!-- 引导页(第一次进入时显示) -->
+    <div class="guide-page clearfix" v-if="isShowGuide">
+      <div></div>
+      <div class="menu-control">
+        <div class="text-box">呼出菜单</div>
+      </div>
+      <div class="right-box">
+        <div class="close-guide" @click="closeGuide">关闭引导页</div>
+      </div>
+    </div>
     <!-- 中心控制区域,控制设置选项的显示隐藏 -->
     <div class="read-action-mid" @click="showOpt"></div>
     <!-- 回到顶部 -->
@@ -29,13 +39,13 @@
           />
         </div> -->
         <!-- <div v-else> -->
-          <p
-            :style="{ fontSize: fontSize + 'px' }"
-            v-for="(item, index) in cpContent"
-            :key="index"
-          >
-            {{ item }}
-          </p>
+        <p
+          :style="{ fontSize: fontSize + 'px' }"
+          v-for="(item, index) in cpContent"
+          :key="index"
+        >
+          {{ item }}
+        </p>
         <!-- </div> -->
       </div>
       <!-- 加载下一章按钮 -->
@@ -72,8 +82,9 @@
             ><i class="icon-reduce-size"></i
           ></span>
         </div>
+        <span class="showSize">{{ fontSize }}</span>
         <!-- 增加 -->
-        <div class="read-setsize-item">
+        <div class="read-setsize-item"> 
           <span
             :class="{ nochange: fontSize >= 24 }"
             @click="changeFontSize(true)"
@@ -109,7 +120,7 @@
           v-model="chapterValue"
           bar-height="4px"
           button-size="16px"
-          active-color="#00bb86"
+          active-color="#B5331D"
           @input="slideHandel"
           class="slider"
         /> -->
@@ -125,7 +136,7 @@
           <template v-if="nightMode">
             <span><i class="icon-sun"></i></span>
             <p class="bar-item">日间模式</p>
-          </template>
+          </template> 
           <template v-else>
             <span><i class="icon-moon"></i></span>
             <p class="bar-item">夜间模式</p>
@@ -166,6 +177,9 @@
           >
             {{ item.title }}
             <!-- _id 章节id -->
+            <span class="lock-img fr" v-if="item.isVip">
+              <img class="auto-img" src="../assets/images/lock.png" alt="VIP" />
+            </span>
           </li>
         </ul>
       </div>
@@ -189,12 +203,23 @@ import * as api from '@/api/api'
 // vuex里导入 mapState mapMutations
 
 // 使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）。
-import { mapState, mapMutations } from 'vuex';
+// import { mapState } from 'vuex';
+
+import {
+  setStorage,
+  // getStorage
+  // delStorage
+} from '../assets/js/tool';
 
 export default {
   // 字体大小 , data设置默认字体, 动态绑定style, 本地存储改变后的
   data() {
     return {
+
+      isShowGuide: null,  // 是否显示引导页
+
+      // size: '',
+
       isshowOpt: false, // 顶部和底部操作栏
       isShowSet: false, // 设置(字体, 换肤)选项
       isShowCata: false,  // 控制目录
@@ -245,18 +270,45 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'nightMode',
-      'skinColor',
-      'fontSize'
-    ])
+    // ...mapState([
+    //   'nightMode',
+    //   'skinColor',
+    //   'fontSize'
+    // ])
+
+    //访问readModule模块的state
+    nightMode() {
+      return this.$store.state.readModule.nightMode;
+    },
+    skinColor() {
+      return this.$store.state.readModule.skinColor;
+    },
+    fontSize() {
+      return this.$store.state.readModule.fontSize;
+    },
   },
   created() {
     this.bookId = this.$route.params.bookid;
     this.title = decodeURIComponent(this.$route.query.title);
+
+    // 引导页  判断是否存在guideControl
+    this.isShowGuide = window.localStorage.getItem('guideControl');
+
+    if (this.isShowGuide) {
+      // 存在就下次不显示
+      this.isShowGuide = false;
+    } else {
+      // 不存在就显示, 并存储guideControl, 显示引导页 (第一次进入)
+      window.localStorage.setItem('guideControl', 1)
+      this.isShowGuide = true;
+    }
+
     // 默认皮肤
     if (!this.skinBgList.includes(this.skinColor)) {
-      this.SET_SKIN_COLOR('skin-default');
+      // this.SET_SKIN_COLOR('skin-default');
+      this.$store.dispatch('readModule/SetSkinColor', 'skin-default').then(() => {
+        setStorage('SKINCOLOR', 'skin-default');
+      })
     }
 
     // 判断是否要加载上一次离开的章节
@@ -302,11 +354,16 @@ export default {
 
     //将mutation里的方法映射到该组件内
     //等同于this.$store.commit('SET_NIGHT_MODE') 
-    ...mapMutations([
-      'SET_NIGHT_MODE',
-      'SET_SKIN_COLOR',
-      'SET_FONT_SIZE',
-    ]),
+    // ...mapMutations([
+    //   'SET_NIGHT_MODE',
+    //   'SET_SKIN_COLOR',
+    //   'SET_FONT_SIZE',
+    // ]),
+
+    // 关闭引导页
+    closeGuide() {
+      this.isShowGuide = false;
+    },
 
     // 控制目录显示隐藏
     ShowCata() {
@@ -343,13 +400,26 @@ export default {
       this.isshowOpt = false;
       this.isShowSet = false;
       //由于上一步已经将mutation映射到组件内，所以组件可以直接调用SET_NIGHT_MODE
-      this.SET_NIGHT_MODE(!this.nightMode);
+      // this.SET_NIGHT_MODE(!this.nightMode);
+      this.$store.dispatch('readModule/SetNightMode', !this.nightMode).then(() => {
+        //存储当前设置的值
+        setStorage('NIGHTMODE', this.nightMode);
+      })
     },
     // 切换皮肤
     changeBgColor(skin) {
+      // 
+      // this.SET_NIGHT_MODE(false);
+      // this.SET_SKIN_COLOR(skin);
       // 关闭夜间模式
-      this.SET_NIGHT_MODE(false);
-      this.SET_SKIN_COLOR(skin);
+      this.$store.dispatch('readModule/SetNightMode', false).then(() => {
+        setStorage('NIGHTMODE', this.nightMode);
+      })
+      // 设置背景色
+      this.$store.dispatch('readModule/SetSkinColor', skin).then(() => {
+        setStorage('SKINCOLOR', skin);
+      })
+
     },
     // 更改字体
     changeFontSize(isAdd) {
@@ -371,7 +441,10 @@ export default {
       }
       let size = this.fontSize;
       isAdd ? size++ : size--
-      this.SET_FONT_SIZE(size);
+      // this.SET_FONT_SIZE(size);
+      this.$store.dispatch('readModule/SetFontSize', size).then(() => {
+        setStorage('FONTSIZE', size);
+      })
     },
 
     // 1. 获取书籍源 
@@ -386,7 +459,10 @@ export default {
         this.id = res.data[0]._id;
         // 2.根据书籍源id获取章节
         this.getChapters(this.id)
-      })
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
+      });
     },
     // 2.根据书籍源id获取章节
     getChapters(id) {
@@ -404,7 +480,10 @@ export default {
         // console.log(this.link);
 
         this.getChapterContent(this.link)
-      })
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
+      });
     },
     // 3. 根据章节获取内容
     getChapterContent(link) {
@@ -421,21 +500,21 @@ export default {
         // cpContent  内容
         // isVip 是否vip
         // console.log(res.data.chapter.cpContent,'****');
-          this.cpContent = res.data.chapter.isVip ? ['vip章节，请到正版网站阅读'] : res.data.chapter.codeStatus === 0 ? ['请安装最新版追书以便使用优质资源'] : res.data.chapter.cpContent.split('\n');
-          // console.log(this.cpContent,'this.cpContent')
+        this.cpContent = res.data.chapter.isVip ? ['vip章节，请到正版网站阅读'] : res.data.chapter.codeStatus === 0 ? ['请安装最新版追书以便使用优质资源'] : res.data.chapter.cpContent.split('\n');
+        // console.log(this.cpContent,'this.cpContent')
 
-          // this.data = this.cpContent.split('\n');
-          this.chapterTitle = res.data.chapter.title;
-          // console.log(this.data);
-          this.speakContent = res.data.chapter.cpContent;
+        // this.data = this.cpContent.split('\n');
+        this.chapterTitle = res.data.chapter.title;
+        // console.log(this.data);
+        this.speakContent = res.data.chapter.cpContent;
 
-          this.$nextTick(() => {
-            this.$toast.clear()
-          })
-      }).catch((err) => {
-        this.$toast.clear()
-        console.log(err)
-      })
+        this.$nextTick(() => {
+          this.$toast.clear()
+        })
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
+      });
     },
     getItemContent(link, index) {
       this.$toast.loading({
@@ -464,7 +543,7 @@ export default {
 
       }).catch((err) => {
         this.$toast.clear()
-        console.log(err)
+        this.$toast(err);
       }
       )
     },

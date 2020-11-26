@@ -10,7 +10,7 @@
           @input="autoComplete"
           placeholder="请输入搜索关键词"
           class="van-ipt"
-          background="#00bb86"
+          background="#B5331D"
         >
         </van-search>
       </div>
@@ -47,7 +47,7 @@
           {{ item.words }}
         </li>
       </ul>
-      <van-empty image="search" description="暂无历史记录" v-else/>
+      <van-empty image="search" description="暂无历史记录" v-else />
     </div>
     <!-- 热门书籍 -->
     <div class="search-history search-section hot-search">
@@ -132,6 +132,9 @@ export default {
         // console.log(this.bookList);
         // 随机选取4个数据
         this.getRandomArray(this.bookList, 5);
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
       });
     },
     // 自动补全
@@ -158,21 +161,22 @@ export default {
           this.$toast.clear();
         })
         .catch((error) => {
-          console.log(error);
+          this.$toast.clear();
+          this.$toast(error);
         });
     },
     // 获取搜索热词
-    getHotWords() {
-      let url =
-        "http://api.kele8.cn/agent/http://api.zhuishushenqi.com/book/search-hotwords"
-      this.axios.get(url).then((res) => {
-        // console.log(res, '热词')
-        this.hotWords = res.data.searchHotWords;
-        // 随机选取10个数据
-        // this.getRandomArray1(this.hotWords, 10);
-        // console.log(this.sliceList,'hot');
-      })
-    },
+    // getHotWords() {
+    //   let url =
+    //     "http://api.kele8.cn/agent/http://api.zhuishushenqi.com/book/search-hotwords"
+    //   this.axios.get(url).then((res) => {
+    //     // console.log(res, '热词')
+    //     this.hotWords = res.data.searchHotWords;
+    //     // 随机选取10个数据
+    //     // this.getRandomArray1(this.hotWords, 10);
+    //     // console.log(this.sliceList,'hot');
+    //   })
+    // },
 
     // 搜索自动补充 http://api.zhuishushenqi.com/book/auto-complete?query=凡人
     // 获取搜索结果 http://novel.kele8.cn/search?keyword=遮天
@@ -202,6 +206,8 @@ export default {
         window.localStorage.setItem("seachWord", JSON.stringify(storage));
       }
 
+      // this.getHistoryWord();
+
       // 2. 跳转至搜索结果页面  对传入的值进行编码
       this.$router.push({ name: "searchResult", query: { keyword: encodeURIComponent(val) } });
     },
@@ -213,18 +219,18 @@ export default {
     },
     // 清除历史记录
     clearHistory() {
-      if (this.searchHistory.length <= 0) { 
+      if (this.searchHistory.length <= 0) {
         this.$toast.fail({
           message: '没有历史记录',
           forbidClick: true,
         });
         return;
       } else {
-         this.$dialog
+        this.$dialog
           .confirm({
             message: "是否要清除历史记录?",
             theme: "round-button",
-            confirmButtonColor: '#00bb86',
+            confirmButtonColor: '#B5331D',
             cancelButtonColor: '#222222'
           })
           .then(() => {
@@ -235,17 +241,17 @@ export default {
             });
 
             setTimeout(() => {
-               this.searchHistory = [];
-               window.localStorage.removeItem("seachWord");
-               this.$toast.clear();
+              this.searchHistory = [];
+              window.localStorage.removeItem("seachWord");
+              this.$toast.clear();
             }, 800)
           })
-          .catch(() => {
-            // on cancel
-            console.log("取消清除");
+          .catch((error) => {
+            this.$toast.clear();
+            this.$toast(error);
           });
       }
-     
+
     }
   },
   components: {
@@ -256,7 +262,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .search-history .van-empty{
+/deep/ .search-history .van-empty {
   padding: 0;
 }
 </style>

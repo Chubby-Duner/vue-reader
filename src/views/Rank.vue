@@ -25,7 +25,7 @@
             :key="item._id"
             @click="changeRankId(item._id)"
           >
-            {{ item.title }} 
+            {{ item.title }}
             <!-- <span class="rank-list-item-text">  </span> -->
           </li>
         </ul>
@@ -97,23 +97,8 @@ export default {
       rankId: "",
       rank: true,
 
-      // 触发加载
-      loading: true,
-
-      // 是否全部加载完成数据
-      finished: false,
-
       // 书籍数据
       bookList: [],
-
-      // 所有书籍数据 
-      allBookData: [],
-
-      //每次触底懒加载截取8条数据
-      dataCount: 6,
-
-      //开始截取购物袋数据位置
-      startIndex: 0,
 
       title: '排行',
 
@@ -137,16 +122,11 @@ export default {
       api.getRankBooks(this.rankId).then((res) => {
         this.$toast.clear()
 
-
         this.bookList = res.data.ranking.books;
 
-        // //根据开始截取位置和截取数据数量设置购物袋显示的数据
-        // this.bookList = this.allBookData.slice(this.startIndex, this.startIndex + this.dataCount);        
-
-        // this.startIndex += this.dataCount;
-
-        // //未加载
-        // this.loading = false;
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
       });
     },
   },
@@ -169,6 +149,9 @@ export default {
         // console.log(this.rankId, ' this.rankId ');
         // console.log(this.maleRankList);
         // console.log(this.femaleRankList);
+      }).catch((error) => {
+        this.$toast.clear();
+        this.$toast(error);
       });
     },
     changeSex(sex) {
@@ -185,30 +168,6 @@ export default {
     changeRankId(rankId) {
       this.rankId = rankId;
     },
-    // loadData() {
-    //   console.log('触发懒加载');
-
-    //   // console.log('this.allBookDate ==> ', this.allBookDate);
-
-    //   setTimeout(() => {
-    //     console.log(1111);
-
-    //     //在allBookDate截取数据
-    //     let data = this.allBookData.slice(this.startIndex, this.startIndex + this.dataCount);
-    //     console.log(data,'data');
-    //     this.startIndex += this.dataCount;
-
-    //     this.bookList.push(...data);
-    //     console.log(this.bookList,'this.bookList');
-
-    //     //如果当前截取数据不足8条数据，下次不可能截取的数据
-    //     if (data.length < this.dataCount) {
-    //       this.finished = true;
-    //     }else {
-    //       this.loading = false;
-    //     }
-    //   }, 1500)
-    // }
   },
   components: {
     ChangeSexBar

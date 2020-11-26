@@ -46,7 +46,7 @@ export default {
   width: 100%;
   height: 46px;
   color: #fff;
-  background-color: #15C292;
+  background-color: #B5331D;
   z-index: 1;
 
   .back-icon {

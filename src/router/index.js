@@ -4,7 +4,7 @@ import Main from '@/views/Main'
 
 Vue.use(VueRouter)
 
-const routes = [
+const routes = [ 
     {
         path: '/main',
         name: 'Main',
@@ -14,27 +14,27 @@ const routes = [
             {
                 path: 'bookstore', 
                 name: 'bookstore',
-                component: () => import ('@/views/BookStore')
+                component: () => import ('@/views/BookStore'),
             },
             {
                 path: 'bookshelf',
                 name: 'bookshelf',
-                component: () => import ('@/views/BookShelf')
+                component: () => import ('@/views/BookShelf'),
             },
             {
                 path: 'category',
                 name: 'category',
-                component: () => import ('@/views/Category')
+                component: () => import ('@/views/Category'),
             },
             {
                 path: 'rank',
                 name: 'rank',
-                component: () => import ('@/views/Rank')
+                component: () => import ('@/views/Rank'),
             },
             {
                 path: 'my',
                 name: 'my',
-                component: () => import ('@/views/My')
+                component: () => import ('@/views/My'),
             },
         ]
     },
@@ -67,7 +67,7 @@ const routes = [
     {
         path: '/readbook/:bookid',
         name: 'readbook',
-        component: () => import ('@/views/ReadContent')
+        component: () => import ('@/views/ReadContent'),
     },
     {
         path: '/historyRead',

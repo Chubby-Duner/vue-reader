@@ -2,7 +2,8 @@
   <div>
     <BackBar :title="word" :isResult="1" />
     <WhiteSpace />
-    <BookList :bookList="list" />
+    <BookList :bookList="list" v-if="list.length > 0" />
+    <van-empty description="暂无相关书籍" image="error" v-else />
   </div>
 </template>
 
@@ -37,6 +38,8 @@ export default {
 
         // console.log(res);
         this.list = res.data.books;
+      }).catch((error) => {
+        this.$toast(error);
       })
     }
   },
@@ -47,3 +50,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+/deep/ .van-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/deep/ .van-empty__description {
+  width: 200px;
+  text-align: center;
+}
+</style>

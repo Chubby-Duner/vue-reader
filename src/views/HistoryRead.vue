@@ -21,7 +21,12 @@
         </div>
       </div>
     </div>
-    <van-empty class="custom-image" image="https://img.yzcdn.cn/vant/custom-empty-image.png" description="暂无阅读历史" v-else />
+    <van-empty
+      class="custom-image"
+      image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+      description="暂无阅读历史"
+      v-else
+    />
   </div>
 </template>
 
@@ -56,9 +61,20 @@ export default {
           // console.log(res.data.title)
           this.detailList.push({ bookId: v.bookId, title: res.data.title, cover: res.data.cover, chapter: v.chapter, time: v.time })
           // console.log(this.detailList);
-        }).catch((err) => {
-          console.log(err)
-        })
+          // 按时间排序 
+          // 按照字符编码的顺序进行排序。
+          // 要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较
+
+          // 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+          // 若 a 等于 b，则返回 0。
+          // 若 a 大于 b，则返回一个大于 0 的值。
+          this.detailList.sort((prev, next) => {
+            return next.time < prev.time ? 1 : -1
+          })
+        }).catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
+        });
       }))
 
     },
@@ -68,7 +84,7 @@ export default {
     },
     // 清空历史书籍记录
     clear() {
-      if (this.historyBook.length <= 0) { 
+      if (this.historyBook.length <= 0) {
         this.$toast.fail({
           message: '没有历史书籍',
           forbidClick: true,
@@ -79,7 +95,7 @@ export default {
           .confirm({
             message: "是否要清除阅读历史记录?",
             theme: "round-button",
-            confirmButtonColor: '#00bb86',
+            confirmButtonColor: '#B5331D',
             cancelButtonColor: '#222222'
           })
           .then(() => {
@@ -96,9 +112,10 @@ export default {
               window.localStorage.removeItem("recordHistory")
             }, 800)
           })
-          .catch(() => {
+          .catch((error) => {
             // on cancel
-            console.log("取消清除");
+            this.$toast.clear();
+            this.$toast(error);
           });
       }
     }
@@ -110,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-body{
+body {
   background-color: #f2f2f2 !important;
 }
 

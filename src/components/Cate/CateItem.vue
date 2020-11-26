@@ -64,7 +64,7 @@ export default {
       margin-right: 10px;
       width: 4px;
       height: 100%;
-      background-color: #00bb86;
+      background-color: #B5331D;
     }
 
     .title{

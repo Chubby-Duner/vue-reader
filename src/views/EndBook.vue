@@ -9,7 +9,7 @@
     />
     <div class="press-content">
       <ul class="cate-list">
-        <van-tabs @change="getMinor" color="#00bb86" animated>
+        <van-tabs @change="getMinor" color="#B5331D" animated>
           <van-tab class="cat-item" title="全部">
             <BookList :bookList="allBookList" />
           </van-tab>
@@ -71,7 +71,7 @@ export default {
         })
         .catch((error) => {
           this.$toast.clear();
-          console.log(error)
+          this.$toast(error);
         });
     },
     // vant框架的点击事件
@@ -99,6 +99,9 @@ export default {
           // console.log(res, "子分类书籍");
           this.bookList = res.data.books;
           // console.log(this.bookList, "出版书籍");
+        }).catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
         });
     },
     getAllCateBook() {
@@ -115,6 +118,9 @@ export default {
           // console.log(res, "子分类书籍");
           this.allBookList = res.data.books;
           // console.log(this.allBookList, "全部书籍");
+        }).catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
         });
     },
     back() {
@@ -129,11 +135,11 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ .van-nav-bar .van-icon {
-  color: #00bb86;
+  color: #b5331d;
 }
 
 /deep/ .van-nav-bar__text {
-  color: #00bb86;
+  color: #b5331d;
 }
 
 /deep/ .van-nav-bar .van-icon {
@@ -145,7 +151,7 @@ export default {
 }
 
 /deep/ .van-nav-bar {
-  background-color: #00bb86;
+  background-color: #b5331d;
 }
 
 /deep/ .van-nav-bar__title {

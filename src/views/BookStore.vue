@@ -128,6 +128,9 @@ export default {
         this.hotId = this.maleHotId;
         // console.log(this.maleHotId, 'maleHotId');
         // console.log(this.femaleHotId, 'femaleHotId');
+      }).catch((err) => {
+        this.$toast(err);
+        this.$toast.clear();
       })
       // 54d42d92321052167dfb75e3 男生
       // 54d43437d47d13ff21cad58b 女生

@@ -10,7 +10,7 @@
     height: 46px;
     overflow: hidden;
     color: rgb(255, 255, 255);
-    background-color: #00bb86;
+    background-color: #B5331D;
     box-sizing: border-box;
     z-index: 99;
 
@@ -60,10 +60,11 @@
   }
 
   .shelf-content {
-    padding: 10px;
+    padding: 10px 10px 10px 18px;
 
     ul {
       // display: flex;
+      padding: 10px;
       overflow: hidden;
     }
 
@@ -174,7 +175,7 @@
     }
 
     .del-btn {
-      background: #e4393c;
+      background: #B5331D;
       right: 10px;
     }
   }

@@ -12,8 +12,8 @@
     <WhiteSpace />
     <div class="cate-item" ref="list">
       <ul class="cate-list" v-if="minorList.length > 0">
-        <van-tabs @change="getMinor" color="#00bb86" animated>
-          <van-tab class="cat-item" title="全部">
+        <van-tabs @change="getMinor" color="#B5331D" animated :sticky="true" :offset-top="46+'px'">
+          <van-tab class="cat-item" title="全部" >
             <BookList :bookList="allBookList" />
           </van-tab>
           <van-tab
@@ -22,25 +22,17 @@
             :key="index"
             :title="item"
           >
-            <!-- <van-list
-              v-model="loading"
-              :finished="finished"
-              finished-text="哎呀，没有数据可加载了!"
-              offset="20"
-              @load="loadData"
-            > -->
-              <!-- 图书列表 -->
-              <BookList :bookList="bookList" />
-            <!-- </van-list> -->
+            <!-- 图书列表 -->
+            <BookList :bookList="bookList" />
           </van-tab>
         </van-tabs>
       </ul>
       <div v-else>
-          <BookList :bookList="allBookList" />
+        <BookList :bookList="allBookList" />
       </div>
     </div>
     <!-- <ListLoading v-show="isLoading" />
-    <div class="no-more">没有更多了</div> -->
+    <div class="no-more" v-if="isEnding">没有更多了</div> -->
   </div>
 </template>
 
@@ -60,23 +52,20 @@ export default {
       major: "", // 书籍分类,主分类
       minor: "", // 子分类
       allMinor: '',
-      start: 0, //
+      start: 0, // 
       limit: 20, // 筛选的数量
       minorList: [],
       bookList: [],
       allBookList: [],
       active: "",
 
-      // 触发加载
-      loading: true,
-      //是否全部加载完成数据
-      finished: false,
-      //所有购物袋数据
-      allBookData: [],
-      //每次触底懒加载截取8条数据
-      dataCount: 8,
-      //开始截取购物袋数据位置
-      startIndex: 0,
+      // isLoading: true,
+      // isEnding: false,
+      // $docElement: null,
+      // $body: null,
+      // $list: null,
+      // clientHeight: 0
+
     };
   },
   created() {
@@ -112,12 +101,13 @@ export default {
         })
         .catch((error) => {
           this.$toast.clear();
-          console.log(error)
+          this.$toast(error);
         });
     },
     // vant框架的点击事件
     getMinor(name, title) {
       this.minor = title;
+      // console.log(this.minor, '分类');
       // console.log(this.minor);
       this.getCategoriesInfo();
     },
@@ -134,22 +124,16 @@ export default {
         )
         .then((res) => {
           // console.log(res, "子分类书籍");
-          console.log('分类');
+          // console.log('分类');
 
-          this.allBookData = res.data.books;
-
-          //根据开始截取位置和截取数据数量设置购物袋显示的数据
-          this.bookList = this.allBookData.slice(
-            this.startIndex,
-            this.startIndex + this.dataCount
-          );
+          // this.allBookData = res.data.books;
+          this.bookList = res.data.books;
 
           console.log('this.bookList ==> ', this.bookList);
 
-          this.startIndex += this.dataCount;
-
-          //未加载
-          this.loading = false;
+        }).catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
         });
     },
     // 默认展示全部
@@ -167,42 +151,14 @@ export default {
           // console.log(res, "子分类书籍");
           this.allBookList = res.data.books;
           // console.log(this.allBookList, "全部书籍");
+        }).catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
         });
     },
     back() {
       this.$router.back()
-    },
-    //懒加载书本数据
-    loadData() {
-      console.log("触发懒加载");
-
-      console.log("this.allBookData ==> ", this.allBookData);
-
-      setTimeout(() => {
-        //allBookData
-        let data = this.allBookData.slice(
-          this.startIndex,
-          this.startIndex + this.dataCount
-        );
-
-        // console.log('data ==> ', data);
-
-        this.startIndex += this.dataCount;
-
-        this.bookList.push(...data);
-        console.log('this.bookList 后 ==> ', this.bookList);
-
-        // console.log('this.bookList ==> ', this.bookList);
-
-        //如果当前截取数据不足8条数据，下次不可能截取的数据
-        if (data.length < this.dataCount) {
-          //没有数据可加载时，需要finished修改为true，这样可以不再onload事件
-          this.finished = true;
-        }else { 
-          this.loading = false;
-        }
-      }, 1500);
-    },
+    }
   },
   components: {
     // BackBar,
@@ -226,7 +182,7 @@ export default {
 }
 
 /deep/ .van-nav-bar {
-  background-color: #00bb86;
+  background-color: #b5331d;
 }
 
 /deep/ .van-nav-bar__title {

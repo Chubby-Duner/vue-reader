@@ -112,7 +112,10 @@ export default {
             this.isLoading = false;
           });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.$toast.clear();
+          this.$toast(error);
+        });
     },
     initalBScoller() {
       // 当网络请求完毕更新cate之后,实例化better-scroll.让我们的分类菜单实现跟手势滑动
