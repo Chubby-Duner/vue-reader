@@ -103,13 +103,13 @@
         </div>
         <div class="keepgo" @click="resetSpeak">重置</div>
       </div>
-      <div class="time-list">
+      <!-- <div class="time-list">
         <div class="text">定时:</div>
         <div class="five-min">5分</div>
         <div class="fifty-min">15分</div>
         <div class="thirty-min">30分</div>
         <div class="sixty-min">60分</div>
-      </div>
+      </div> -->
       <div class="quit-speak" @click="stopSpeak">关闭朗读模式</div>
     </div>
     <!-- 尾部设置栏 -->
@@ -630,11 +630,11 @@ export default {
     addHistoryRead(next) {
       let storage = window.localStorage.getItem("recordHistory");
       storage = storage ? JSON.parse(storage) : [];
-
+// < 10 ? '0' + nowData.toTimeString() : nowData.toTimeString()
       // 获取离开的时间
       let nowData = new Date();
       let timeString = nowData.toLocaleDateString() + ' ' + nowData.toTimeString();
-      let time = timeString.slice(0, 20);
+      let time = timeString.slice(0, 19);
       console.log('离开时间 --> ', time);
 
       // 判断是否是同一本书
