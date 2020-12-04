@@ -88,4 +88,4 @@ npm run build
 ### 管理
 +  部分组件使用vant框架，对组件进行管理 vant.config.js , main.js 引入
 
-+  接口api的管理, 设置axios.defaults.baseURL基础路径, api.js进行接口管理, vue-axios请求数据
++  接口api的管理, 设置axios.defaults.baseURL基础路径, api.js进行接口管理, axios请求数据
